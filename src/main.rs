@@ -23,17 +23,7 @@ fn main() {
 
     let tx_1 = tx.clone();
 
-    let buffer_size = client.buffer_size();
-
-    println!("{}", buffer_size);
-
     let mut samples: Vec<(f32, f32)> = vec![(0., 0.); client.buffer_size() as usize];
-
-    let system_out_ports = client.ports(None, None, jack::PortFlags::IS_OUTPUT);
-
-    for s in system_out_ports.iter() {
-        println!("Port: {}", s);
-    }
 
     let process = jack::ClosureProcessHandler::new(
         move |_: &jack::Client, ps: &jack::ProcessScope| -> jack::Control {
